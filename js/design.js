@@ -1,12 +1,3 @@
-fots.design = function(type,subtype,hull,techGen) {
-	this.type = type;
-	this.subtype = subtype;
-	this.hull = hull;
-	this.techGen = techGen;
-	this.equipmentSpace = this.hull * fots.techGenerations[this.techGen][this.type];
-	this.equipment = {};
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // FOTS Unit Design Object
 //	type - ship, base, gunboat, fighter, ground
@@ -15,3 +6,35 @@ fots.design = function(type,subtype,hull,techGen) {
 //	techGen - technology generation for the design
 //	equipmentSpace = amount of equipment space the hull has given the tech generation.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+fots.designDAT = function(type,subtype,hull,techGen) {
+	this.type = type;
+	this.subtype = subtype;
+	this.hull = hull;
+	this.techGen = techGen;
+	this.equipmentSpace = this.hull * fots.techGenerations[this.techGen][this.type];
+	this.equipment = {};
+	this.improvements = [];
+	this.cost = 0;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// FOTS Unit Design Service
+////////////////////////////////////////////////////////////////////////////////////////////////////
+fots.designSVC = function(dat,ui) {
+	this.dat = dat;
+	this.ui = ui;
+
+	this.ui.initialize(this);
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// FOTS Unit Design Interface
+////////////////////////////////////////////////////////////////////////////////////////////////////
+fots.designINT = function() {
+	this.svc = null;
+};
+
+fots.designINT.prototype.initialize = function(svc) {
+	this.svc = svc;
+};
